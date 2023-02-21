@@ -1,0 +1,44 @@
+放大(ctrl+shift+=)缩小(ctrl+-)终端窗口字体，终端命令格式command [-options] [parameter]说明：command命令名[-options]选项，可用来对命令进行控制，可省略parameter传给命令的参数，0个一个或多个[]代表可选
+查询命令帮助信息command --help，man command，man是manual的缩写(操作键:空格，显示手册的下一屏；回车，一次滚动一行；b，回滚一屏；f，前滚一屏；q，退出
+ls(list) 查看当前目录的所有项 ls -l(-h人性化显示文件大小)详细模式查看 ls -a查看所有，包括隐藏文件ls -a /home/autowise，如有多个命令，可分开输入，可合并输入且无先后顺序ls -lha，通配符*代表任意个数字符，?只能代表一个字符[]字符组[abc],[a-f],ls 1*,ls *3.txt,ls 1?3.txt,ls 1[1-5]3.txt
+pwd(print working directory)显示当前工作目录
+cd(change directory)切换目录 ~主目录 .当前目录 ..上级目录 /根目录 cd ~/home/autowise,cd -可在最近2次工作目录来回切换，cd切换到当前用户的主目录
+touch新建文件.开头的文件表示隐藏文件，如果文件不存在可创建一个空白文件，如果文件已经存在，可修改文件末次修改日期
+mkdir(make directory)创建目录 mkdir -p 123/abc/123(-p,可将路径的层次目录全部创建）新建目录的名称不能与当前目中已有的目录或文件同名
+rmdir(remove directory)只能删除空目录 rm -rf 删除目录和子项一并删除，文件不能恢复（rm表示remove，r表示recursive递归地删除目录下的内容，f表示force强制删除 rm -rf 123
+tree[目录名]以树状图列出文件和目录结构 tree -d只显示目录
+cp(copy)复制文件或者目录cp 源文件 目标文件 cp -rf abc abc2(复制目录和其子项）cp -i（覆盖文件提醒）
+mv(move)移动文件或目录（重命名）mv 源文件 目标文件mv abc abc2（mv -i覆盖文件提醒）
+cat文件名concatenate查看文件内容(适合内容较少)、创建文件、文件合并、追加文件内容等功能cat -b对非空输出行编号,cat -n对输出所有行编号
+more文件名（分屏显示文件内容）(适合内容多的文件)(操作键:空格，显示手册的下一屏；回车，一次滚动一行；b，回滚一屏；f，前滚一屏；q，退出
+grep允许对文本文件进行模式查找-n显示匹配行及行号-v显示不包含匹配文本的所有行(相当于求反)-i忽略大小写^x行首，搜索以x开头的行x$行尾，搜索以x结束的行
+echo在终端中显示指定文字，通常会和重定向联合使用
+重定向，将本应显示在终端上的内容输出/追加到指定文件中>表示输出，会覆盖文件原有内容>>表示追加，会将内容追加到已有文件末尾echo hello > a,ls -lh > a
+管道|允许将一个命令的输出可以通过管道作为另外一个命令的输出，常用的管道命令有：more/grep,ls -lha | more,ls -lha | grep vi
+tar(tape archive)档案打包 tar -cvf 123.tar 123(c表示create创建档案,v表示verbose显示详情，f表示file文件名）还原档案包 tar -xvf 123.tar(tar -xvf 123.tar -C home)-C指定目录  gzip打包并压缩 tar -zc(x)vf 123.tar.gz 123，bzip2打包压缩tar -jc(x)vf 123.tar.bz2 123
+find查找文件find [路径] -name "*.py"查找指定路径下的所有.py文件，包括子目录
+ln(link)创建软链接ln -s [文件路径]abc abc2(快捷方式），文件路径为绝对路径可随便移动软链接，若为相对路径移动软链接位置可能会失效，硬链接ln [文件路径]abc abc2,删除原文件都有效
+clear清屏
+远程管理命令：shutdown(关机/重新启动) 选项 时间(不指定选项和参数，默认1min后关闭电脑)-r 重启shutdown -r now,shutdown 20:20,shutdown +10
+查看或配置网卡信息:ping访问连接CTRL+C中断，ping 172.0.0.1查看本地网卡是否工作正常，查看IP，ifconfig，ifconfig | grep inet安装软件apt install(remove) xxx安装一个软件包(remove移除，search搜索，apt list | grep xxx列表)更新已安装的包sudo apt upgrade开启（关闭）网路sudo ifconfig xxx up(down)
+sudo useradd -m(-g) test1添加用户(sudo表示以管理员身份执行）-m表示在home下添加用户目录-g指定用户所在的组，否则默认创建一个和用户同名的组，sudo passwd test1修改用户密码sudo userdel test1删除用户
+groupadd 组名，添加组，groupdel 组名，删除组，cat /etc/group确认组信息，chgrp -R 组名 文件/目录名，递归修改文件/目录的所属组。/etc/passwd文件存放的是用户的信息。
+查看用户信息：id 用户名，查看用户UID和GID信息，who，查看当前所有登录的用户列表，whoami，查看当前登录用户的用户名,usermod可设置用户的主组/附加组和登录Shell，usermod -g(-G) 组 用户名，-g修改主组GID，-G修改附加组（用户的附加权限）,usermod -s /bin/bash 用户名，修改用户登录Shell(终端命令窗口，带颜色，更高效)，Ubuntu默认是dash
+超级用户root，第一次使用需要给root设置密码sudo passwd root切换到root用户su root(su表示switch user)退出exit,切换用户su，su (-) 用户名，-切换用户并切换目录
+which可查看执行命令所在位置，bin普通可执行文件，sbin系统相关的可执行文件
+文件权限owner文件属主-r可读read(4)，-w可写write(2)，-x可执行execute(1)
+修改文件权限chmod o+w 123.txt(chmod,change file mode,o表示other别人，+w表示增写write权限）-表示减去权限，a表示all所有人，u表示user自己，chmod -R 755 文件名/目录名
+修改文件属主chown（change owner）sudo chown -R autowise opt/autowise
+系统命令：date查看系统时间cal(calendar) -y查看当月日历，y可查看一年的日历df -h(disk free)显示磁盘剩余空间du -h [目录名](disk usage)显示目录下的文件大小
+环境变量，定义变量NAME=/opt/autowise使用变量${NAME}如有定界符，简写$NAME,例echo $NAME/build/终端里面定义环境变量export NAME=/opt（这个只能在当前终端里面有效）查看所有环境变量printenv用户环境变量.profile,这里面定义的开机就能用（此用户永久有效）系统环境变量/etc/profile.d/name.sh(所有用户都有效）
+PATH环境变量，用于描述可执行程序的搜索路径 /usr/bin/(tar),/usr/sbin/(useradd),/usr/local/(s)bin其中sbin为超级用户root才能执行的程序，/usr/下系统自带的程序，/usr/local/是用户安装的程序
+修改PATH环境变量，编辑/etc/profile.d/name.sh设定PATH环境变量export PATH=$PATH:/home/autowise
+怎么把文件传到Ubuntu，软件FileZilla网络传输FTP服务器SFTP，使用SSH(Secure Shell)服务器，可远程终端，ssh [-p port] user@remote,user远程机器用户名，remote远程机器地址IP/域名，port，SSH Server监听的端口，如不指定，默认22。.ssh文件里面的免协议known_hosts,免密码登录，ssh-keygen在.ssh下生成SSH钥匙id_rsa.pub文件,ssh-copy-id user@remote把文件内容复制到服务器,.ssh配置别名。Windows下安装SSH客户端，Putty或者XShell。文件传输（使用Xshell远程登录，使用Xftp传输文件）文本文件换行符Windows：\r\n，Linux：\n(编辑|文档格式转换|转换UNIX格式，只有在编辑Shell脚本的时候才需要转换）scp(secure copy)远程拷贝文件，本地复制到远程scp [-P port] 文件名 user@remote:Desktop/文件名，远程复制到本地scp [-P port] user@remote:Desktop/文件名 文件名。复制目录：scp -r 目录名 user@remote:Desktop,scp -r user@remote:Desktop 目录名。端口号：SSH服务器:22,Web服务器:80,HTTPS:443,FTP服务器:21
+vi/vim一个基于控制台的文本编辑器，切换模式：编辑模式Insert Mode，按i键，命令模式Command Mode：按ESC键。退出编辑ESC，输入:wq保存并退出，输入:q退出，输入:q!强制退出（放弃保存）
+gedit一个基于GUI的文本编辑器，Ctrl+s保存Ctrl+f搜索查找
+Java程序的运行java -jar xxx.jar创建运行脚本，使用run_java.sh来运行java程序，修改run_.sh，转换UNIX风格，上传Linux，添加+x权限
+Tomcat服务器,运行tomcat/bin/start.sh(shutdown.sh)检查tomcat是否在运行ps -ef | grep java,或netstat -anp | grep 8080,关闭防火墙ufw disabl，访问http：192.168.242.193:8080
+Tomcat配置：/home/autowise/tomcat/conf/server.xml部署/root下，网站根目录/opt/www_your_com/ROOT观察Tomcat启动日志cat /root/tomcat/logs/catalina.out认识catalina.sh启动Tomcat，相当于startup.sh,tomcat/bin/catalina.sh start停止Tomcat，tomcat/bin/catalina.sh stop前台运行Tomcat（用于调试）tomcat/bin/catalina.sh run
+程序与进程：运行多个/usr/bin/vim,并观察进程信息ps -ef 其中UID(USER)执行者PID进程ID，PPID父进程ID，STIME启动时间，CMD启动时调用的命令行ps -ef | grep xxx按名称查找进程,ps au(x)(process status)查看进程的详细情况
+进程管理：进程监视top（动态刷新）,按上下键翻阅，按q或CTRL+C终止退出，查看某个进程top -p xxx(xxx为目标进程的PID）杀死进程kill -9 xxx或pkill name_of_progress
+Redis服务器，一款基于内存的Key-Value型数据库，MySQL服务器，跨平台，免费(MariaDB)
